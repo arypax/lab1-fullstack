@@ -1,12 +1,14 @@
 [build]
   command = "npm run build"
   publish = ".next"
+  base = "apps/frontend"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
 [build.environment]
   NODE_VERSION = "20"
+  NPM_FLAGS = "--prefix apps/frontend"
 
 # Переменные окружения (установите в Netlify Dashboard)
 # NEXT_PUBLIC_API_BASE_URL будет установлена через Environment variables в Netlify
