@@ -1,0 +1,7 @@
+apps/backend
+infra
+*.md
+.git
+node_modules
+pnpm-lock.yaml
+
