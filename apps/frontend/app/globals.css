@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0b0f1a;
+  --fg: #e5e7eb;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* AG Grid styles override */
+.ag-theme-material {
+  --ag-background-color: #1a1f2e !important;
+  --ag-header-background-color: #252b3b !important;
+  --ag-odd-row-background-color: #1f2533 !important;
+  --ag-row-hover-color: #2a3142 !important;
+  --ag-border-color: rgba(255, 255, 255, 0.1) !important;
+  --ag-header-foreground-color: #e5e7eb !important;
+  --ag-foreground-color: #e5e7eb !important;
+  --ag-data-color: #e5e7eb !important;
+  --ag-font-size: 14px !important;
+}
+
+/* Убеждаемся что AG Grid отображается - защита от Tailwind */
+.ag-theme-material {
+  width: 100% !important;
+  height: 500px !important;
+}
+
+/* Убеждаемся что текст виден - КРИТИЧНО */
+.ag-theme-material .ag-cell,
+.ag-theme-material .ag-header-cell {
+  color: #e5e7eb !important;
+}
+
+.ag-theme-material .ag-cell-value,
+.ag-theme-material .ag-cell-wrapper,
+.ag-theme-material .ag-cell-content,
+.ag-theme-material .ag-cell-text {
+  color: #e5e7eb !important;
+  background-color: transparent !important;
+}
+
+.ag-theme-material .ag-row {
+  background-color: #1a1f2e !important;
+  color: #e5e7eb !important;
+}
+
+.ag-theme-material .ag-row-odd {
+  background-color: #1f2533 !important;
+}
+
+.ag-theme-material .ag-header {
+  background-color: #252b3b !important;
+  color: #e5e7eb !important;
+}
+
+.ag-theme-material .ag-header-cell-text {
+  color: #e5e7eb !important;
+}
+
+/* Убеждаемся что ячейки видны и правильно отображаются */
+.ag-theme-material .ag-cell {
+  overflow: visible !important;
+}
+
+.ag-theme-material .ag-cell-value {
+  overflow: visible !important;
+  white-space: normal !important;
+}
+
+

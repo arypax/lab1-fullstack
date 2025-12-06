@@ -1,0 +1,80 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: lab1_postgres
+    environment:
+      POSTGRES_DB: lab1db
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d lab1db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - app-network
+
+  pgadmin:
+    image: dpage/pgadmin4:8
+    container_name: lab1_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ../apps/backend
+      dockerfile: Dockerfile
+    container_name: lab1_backend
+    environment:
+      DATABASE_URL: postgresql+psycopg2://app:app@postgres:5432/lab1db
+    ports:
+      - "4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+    command: >
+      sh -c "
+        poetry run alembic upgrade head &&
+        poetry run uvicorn app.main:app --host 0.0.0.0 --port 4000
+      "
+
+  frontend:
+    build:
+      context: ../apps/frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE_URL: http://localhost:4000
+    container_name: lab1_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=production
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+
+

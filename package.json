@@ -1,0 +1,14 @@
+{
+  "name": "@lab1/monorepo",
+  "private": true,
+  "packageManager": "pnpm@9",
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  },
+  "scripts": {
+    "dev": "concurrently -n DB,API,WEB -c blue,green,magenta \"docker compose -f infra/docker-compose.yml up -d\" \"pnpm --filter @lab1/backend dev\" \"pnpm --filter @lab1/frontend dev\"",
+    "stop:db": "docker compose -f infra/docker-compose.yml down -v"
+  }
+}
+
+

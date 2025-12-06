@@ -1,0 +1,337 @@
+{
+  "info": {
+    "name": "Car Database API - Lab 3",
+    "description": "Коллекция для тестирования RESTful API управления автомобилями и владельцами",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:4000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Echo Test",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/echo?msg=Hello",
+              "host": ["{{base_url}}"],
+              "path": ["echo"],
+              "query": [
+                {
+                  "key": "msg",
+                  "value": "Hello"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Owners",
+      "item": [
+        {
+          "name": "Get All Owners",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/owners",
+              "host": ["{{base_url}}"],
+              "path": ["owners"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Owner",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstname\": \"Иван\",\n  \"lastname\": \"Петров\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/owners",
+              "host": ["{{base_url}}"],
+              "path": ["owners"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Owner by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/owners/1",
+              "host": ["{{base_url}}"],
+              "path": ["owners", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Owner",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstname\": \"Иван\",\n  \"lastname\": \"Сидоров\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/owners/1",
+              "host": ["{{base_url}}"],
+              "path": ["owners", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Owner",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/owners/1",
+              "host": ["{{base_url}}"],
+              "path": ["owners", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cars",
+      "item": [
+        {
+          "name": "Get All Cars",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/cars",
+              "host": ["{{base_url}}"],
+              "path": ["cars"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Car",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"brand\": \"Toyota\",\n  \"model\": \"Camry\",\n  \"color\": \"Белый\",\n  \"registration_number\": \"А123БВ\",\n  \"model_year\": 2023,\n  \"price\": 2500000,\n  \"owner_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/cars",
+              "host": ["{{base_url}}"],
+              "path": ["cars"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Car by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/cars/1",
+              "host": ["{{base_url}}"],
+              "path": ["cars", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Car",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"color\": \"Красный\",\n  \"price\": 2700000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/cars/1",
+              "host": ["{{base_url}}"],
+              "path": ["cars", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Car",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/cars/1",
+              "host": ["{{base_url}}"],
+              "path": ["cars", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Car Filters",
+      "item": [
+        {
+          "name": "Filter by Brand",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/cars?brand=Toyota",
+              "host": ["{{base_url}}"],
+              "path": ["cars"],
+              "query": [
+                {
+                  "key": "brand",
+                  "value": "Toyota"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Color",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/cars?color=Белый",
+              "host": ["{{base_url}}"],
+              "path": ["cars"],
+              "query": [
+                {
+                  "key": "color",
+                  "value": "Белый"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Year",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/cars?model_year=2023",
+              "host": ["{{base_url}}"],
+              "path": ["cars"],
+              "query": [
+                {
+                  "key": "model_year",
+                  "value": "2023"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Owner",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/cars?owner_id=1",
+              "host": ["{{base_url}}"],
+              "path": ["cars"],
+              "query": [
+                {
+                  "key": "owner_id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search by Brand",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/cars/search/brand/Toyota",
+              "host": ["{{base_url}}"],
+              "path": ["cars", "search", "brand", "Toyota"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search by Color",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/cars/search/color/Белый",
+              "host": ["{{base_url}}"],
+              "path": ["cars", "search", "color", "Белый"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
+
