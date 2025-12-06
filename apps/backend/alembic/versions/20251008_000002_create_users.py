@@ -11,13 +11,19 @@ depends_on = None
 
 
 def upgrade() -> None:
-    op.create_table(
-        "users",
-        sa.Column("id", sa.Integer(), primary_key=True),
-        sa.Column("username", sa.String(length=150), nullable=False, unique=True),
-        sa.Column("password_hash", sa.String(length=255), nullable=False),
-        sa.Column("role", sa.String(length=32), nullable=False),
-    )
+    # Проверяем, существует ли таблица
+    bind = op.get_bind()
+    inspector = sa.inspect(bind)
+    tables = inspector.get_table_names()
+    
+    if "users" not in tables:
+        op.create_table(
+            "users",
+            sa.Column("id", sa.Integer(), primary_key=True),
+            sa.Column("username", sa.String(length=150), nullable=False, unique=True),
+            sa.Column("password_hash", sa.String(length=255), nullable=False),
+            sa.Column("role", sa.String(length=32), nullable=False),
+        )
 
 
 def downgrade() -> None:
