@@ -44,14 +44,7 @@ def create_app() -> FastAPI:
         },
     )
 
-    # Разрешенные источники для CORS
-    # Можно настроить через переменную окружения CORS_ORIGINS
-    import os
-    cors_origins_env = os.getenv("CORS_ORIGINS", "http://localhost:3000")
-    allowed_origins: List[str] = [
-        origin.strip() for origin in cors_origins_env.split(",")
-    ]
-    
+    allowed_origins: List[str] = ["http://localhost:3000"]
     app.add_middleware(
         CORSMiddleware,
         allow_origins=allowed_origins,
