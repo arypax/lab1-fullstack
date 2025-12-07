@@ -1,6 +1,6 @@
 [build]
   base = "apps/frontend"
-  command = "npm install && node node_modules/next/dist/bin/next build"
+  command = "npm run build"
   publish = ".next"
 
 [[plugins]]
@@ -8,5 +8,5 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  NPM_FLAGS = "--legacy-peer-deps"
+  # Используем настройки npm/lock-файл по умолчанию
 
