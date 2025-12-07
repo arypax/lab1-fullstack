@@ -44,7 +44,12 @@ def create_app() -> FastAPI:
         },
     )
 
-    allowed_origins: List[str] = ["http://localhost:3000"]
+    # CORS: разрешаем локальный фронт и продакшен-домены (Netlify, при необходимости другие)
+    allowed_origins: List[str] = [
+        "http://localhost:3000",
+        "https://zesty-marshmallow-049df6.netlify.app",
+        "https://6935c869b32d4073100617a8--zesty-marshmallow-049df6.netlify.app",
+    ]
     app.add_middleware(
         CORSMiddleware,
         allow_origins=allowed_origins,
