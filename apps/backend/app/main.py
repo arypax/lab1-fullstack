@@ -1,5 +1,7 @@
 from datetime import datetime, timezone
 from typing import List
+import subprocess
+import sys
 
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
@@ -61,6 +63,23 @@ def create_app() -> FastAPI:
 
     @app.on_event("startup")
     async def on_startup() -> None:
+        # Запускаем миграции Alembic при старте
+        try:
+            logger.info("Running database migrations...")
+            result = subprocess.run(
+                ["alembic", "upgrade", "head"],
+                cwd="/app",
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if result.returncode == 0:
+                logger.info("Database migrations completed successfully")
+            else:
+                logger.warning(f"Migration output: {result.stdout}")
+                logger.warning(f"Migration errors: {result.stderr}")
+        except Exception as e:
+            logger.error(f"Failed to run migrations: {e}")
         logger.info("Car Database API started")
 
     @app.get("/health", tags=["system"], summary="Проверка состояния API")
