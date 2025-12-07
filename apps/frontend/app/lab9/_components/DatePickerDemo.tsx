@@ -20,7 +20,7 @@ export function DatePickerDemo() {
       <div className="p-4 rounded-lg bg-white/5 border border-white/10">
         <label className="block text-sm text-white/70 mb-2">Выберите дату:</label>
         <DatePicker
-          onChange={setDate}
+          onChange={(value) => setDate(value instanceof Date ? value : null)}
           value={date}
           className="bg-white/5"
         />
