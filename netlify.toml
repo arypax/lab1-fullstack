@@ -1,5 +1,6 @@
 [build]
   base = "apps/frontend"
+  command = "npx next build"
   publish = ".next"
 
 [[plugins]]
