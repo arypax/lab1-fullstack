@@ -1,6 +1,6 @@
 [build]
   base = "apps/frontend"
-  command = "npm install && npx --yes next build"
+  command = "npm install && node node_modules/next/dist/bin/next build"
   publish = ".next"
 
 [[plugins]]
