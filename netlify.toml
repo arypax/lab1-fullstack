@@ -1,6 +1,6 @@
 [build]
   base = "."
-  command = "cd apps/frontend && npm install && npm run build"
+  command = "pnpm --filter @lab1/frontend run build"
   publish = "apps/frontend/.next"
 
 [[plugins]]
