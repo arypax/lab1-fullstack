@@ -1,7 +1,6 @@
 {
   "name": "@lab1/monorepo",
   "private": true,
-  "packageManager": "pnpm@9.0.0",
   "devDependencies": {
     "concurrently": "^9.0.0"
   },

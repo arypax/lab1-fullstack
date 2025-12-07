@@ -1,6 +1,6 @@
 [build]
   base = "apps/frontend"
-  command = "cd apps/frontend && npm install --legacy-peer-deps && npm run build"
+  command = "cd apps/frontend && npm install --legacy-peer-deps --package-lock-only && npm run build"
   publish = "apps/frontend/.next"
 
 [[plugins]]
