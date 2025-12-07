@@ -1,6 +1,6 @@
 [build]
   base = "apps/frontend"
-  command = "PATH=$PATH:./node_modules/.bin && next build"
+  command = "./node_modules/.bin/next build"
   publish = ".next"
 
 [[plugins]]
