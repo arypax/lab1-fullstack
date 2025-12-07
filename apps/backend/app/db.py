@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
-DATABASE_URL = "postgresql+psycopg2://app:app@localhost:5432/lab1db"
+DATABASE_URL = os.getenv(
+    "DATABASE_URL", 
+    "postgresql+psycopg2://app:app@localhost:5432/lab1db"
+)
 
 
 class Base(DeclarativeBase):

@@ -21,13 +21,13 @@ def post_owner(
 
 
 @router.get("", response_model=list[OwnerRead], summary="Получить всех владельцев")
-def list_owners(db: Session = Depends(get_db), _: str = Depends(get_current_username)):
+def list_owners(db: Session = Depends(get_db)):
     """Получить список всех владельцев"""
     return get_owners(db)
 
 
 @router.get("/{owner_id}", response_model=OwnerRead, summary="Получить владельца по ID")
-def get_owner(owner_id: int, db: Session = Depends(get_db), _: str = Depends(get_current_username)):
+def get_owner(owner_id: int, db: Session = Depends(get_db)):
     """Получить владельца по его ID"""
     owner = get_owner_by_id(db, owner_id)
     if not owner:

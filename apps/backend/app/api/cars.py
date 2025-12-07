@@ -34,7 +34,6 @@ def list_cars(
     color: str | None = Query(None),
     model_year: int | None = Query(None),
     db: Session = Depends(get_db),
-    _: str = Depends(get_current_username),
 ):
     if brand:
         return get_cars_by_brand(db, brand)
@@ -46,7 +45,7 @@ def list_cars(
 
 
 @router.get("/{car_id}", response_model=CarRead)
-def get_car(car_id: int, db: Session = Depends(get_db), _: str = Depends(get_current_username)):
+def get_car(car_id: int, db: Session = Depends(get_db)):
     car = get_car_by_id(db, car_id)
     if not car:
         raise HTTPException(status_code=404, detail="Car not found")
