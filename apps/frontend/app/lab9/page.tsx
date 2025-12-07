@@ -1,10 +1,26 @@
 "use client"
 
 import React from 'react'
-import { DatePickerDemo } from './_components/DatePickerDemo'
-import { AGGridDemo } from './_components/AGGridDemo'
-import { MaterialUIDemo } from './_components/MaterialUIDemo'
-import { ReactRouterDemo } from './_components/ReactRouterDemo'
+import dynamic from 'next/dynamic'
+
+// Динамические импорты, чтобы отключить SSR для компонентов,
+// которые используют browser-only API (document, window и т.п.)
+const DatePickerDemo = dynamic(
+  () => import('./_components/DatePickerDemo').then((m) => m.DatePickerDemo),
+  { ssr: false }
+)
+const AGGridDemo = dynamic(
+  () => import('./_components/AGGridDemo').then((m) => m.AGGridDemo),
+  { ssr: false }
+)
+const MaterialUIDemo = dynamic(
+  () => import('./_components/MaterialUIDemo').then((m) => m.MaterialUIDemo),
+  { ssr: false }
+)
+const ReactRouterDemo = dynamic(
+  () => import('./_components/ReactRouterDemo').then((m) => m.ReactRouterDemo),
+  { ssr: false }
+)
 
 export default function Lab9Page() {
   React.useEffect(() => {
